@@ -13,13 +13,13 @@ export default function CartPage() {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th scope="col" style={{width: "25%"}}>Image</th>
-              <th scope="col" style={{width: "30%"}}>Name</th>
-              <th scope="col" style={{width: "5%"}}>Size</th>
-              <th scope="col" style={{width: "5%"}}>Color</th>
-              <th scope="col" style={{width: "10%"}}>Price</th>
-              <th scope="col" style={{width: "10%"}}>Quantity</th>
-              <th scope="col" style={{width: "15%"}}>Total</th>
+              <th scope="col" className="col-cart-avatar">Image</th>
+              <th scope="col" className="col-cart-name">Name</th>
+              <th scope="col" className="col-cart-size">Size</th>
+              <th scope="col" className="col-cart-color">Color</th>
+              <th scope="col" className="col-cart-price">Price</th>
+              <th scope="col" className="col-cart-quantity">Quantity</th>
+              <th scope="col" className="col-cart-total">Total</th>
             </tr>
           </thead>
           <tbody>

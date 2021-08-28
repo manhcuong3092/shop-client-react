@@ -1,4 +1,5 @@
 import Filter from './Filter';
+import { CartContext } from "../contexts/Cart";
 
 export default function FilterGroup(props) {
   const sizes = ['s', 'm', 'l', 'xl'];
@@ -10,7 +11,12 @@ export default function FilterGroup(props) {
     <div className="col-lg-3">
       <h1 className="my-4">Shop Name</h1>
       <h5 className="mb-4">Hello <span>User</span></h5>
-      <h5 className="mb-4"><a href="#">Cart</a> <span>(1)</span></h5>
+        <h5 className="mb-4">
+          <a href="#">Cart</a>
+          <CartContext.Consumer>
+            { ({totalItem}) => <span>({ totalItem })</span> }
+          </CartContext.Consumer>
+        </h5>
       <div className="mb-3">
         Search product
         <input type="text" />

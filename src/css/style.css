@@ -23,3 +23,23 @@
  body {
   padding-top: 56px;
 }
+
+.col-cart-avatar {
+  width: 25%;
+}
+
+.col-cart-name {
+  width: 30%;
+}
+
+.col-cart-size .col-cart-color {
+  width: 5%;
+}
+
+.col-cart-price .col-cart-quantity {
+  width: 10%;
+}
+
+.col-cart-total {
+  width: 15%;
+}

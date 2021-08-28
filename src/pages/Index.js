@@ -1,14 +1,31 @@
 import React from "react";
+import axios from "axios";
 import "../css/style.css";
 import "../css/bootstrap.min.css";
 import bannerImg from "../img/900x350.png"
 import Item from '../components/Item';
 import FilterGroup from "../components/FilterGroup";
 
-export default function HomePage() {
-  return (
-      <div className="container">
+export default class HomePage extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      products: [],
+      page: 1
+    }
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:4000/api/products')
+         .then( response => { this.setState({ products: response.data }) });
+    console.log(this.state);
+  };
+
+  render() {
+    return (
+      <div className="container">
         <div className="row">
           <FilterGroup />
           <div className="col-lg-9">
@@ -40,12 +57,7 @@ export default function HomePage() {
             </div>
 
             <div className="row">
-              <Item />
-              <Item />
-              <Item />
-              <Item />
-              <Item />
-              <Item />
+              { this.state.products.map((product) => <Item product={product} />) }
             </div>
 
             <nav aria-label="...">
@@ -69,5 +81,6 @@ export default function HomePage() {
         </div>
 
       </div>
-  )
+    );
+  }
 }

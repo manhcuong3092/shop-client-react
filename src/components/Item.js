@@ -1,17 +1,18 @@
 import '../css/bootstrap.min.css';
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import productImg from "../img/700x400.png";
 
-export default function Item() {
+export default function Item(props) {
   return (
     <div className="col-lg-4 col-md-6 mb-4">
       <div className="card h-100">
-        <a href="product.html"><img className="card-img-top" src={productImg} alt="" /></a>
+        <Link to={"/product/" + props.product._id }><img className="card-img-top" src={'http://localhost:4000' + props.product.avatar } alt="" /></Link>
         <div className="card-body">
           <h4 className="card-title">
-            <a href="product.html">Item One</a>
+            <Link to={"/product/" + props.product._id }>{ props.product.name }</Link>
           </h4>
-          <h5>$24.99</h5>
-          <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+          <h5>{ props.product.price }$</h5>
+          <p className="card-text">{ props.product.shortDescription }</p>
         </div>
         <div className="card-footer">
           <small className="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
