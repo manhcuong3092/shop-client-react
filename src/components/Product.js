@@ -50,7 +50,7 @@ export default function Product(props) {
               <CartContext.Consumer>
                 {({addToCart}) => 
                   <button className="btn btn-primary add-to-cart"
-                    onClick={() => addToCart(product._id, quantity, size, color)}>Add to cart</button>
+                    onClick={() => addToCart(product, quantity, size, color)}>Add to cart</button>
                 }
               </CartContext.Consumer>
             </div>

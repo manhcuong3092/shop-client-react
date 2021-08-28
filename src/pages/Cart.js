@@ -3,6 +3,7 @@ import "../css/style.css";
 import "../css/bootstrap.min.css";
 
 import CartItem from '../components/CartItem';
+import { CartContext } from '../contexts/Cart';
 
 export default function CartPage() {
   return (
@@ -20,18 +21,23 @@ export default function CartPage() {
               <th scope="col" className="col-cart-price">Price</th>
               <th scope="col" className="col-cart-quantity">Quantity</th>
               <th scope="col" className="col-cart-total">Total</th>
+              <th scope="col" className="col-cart-total">Remove</th>
             </tr>
           </thead>
           <tbody>
-            <CartItem />
-            <CartItem />
-            <CartItem />
+            <CartContext.Consumer>
+              { ({cartItems}) => ( cartItems.map(item => <CartItem item={item} />)) }
+            </CartContext.Consumer>
           </tbody>
         </table>
 
         <div class="card mb-3"  style={{width: "18rem"}}>
           <div className="card-body">
-            <h5 className="card-title">Total: <span>1000$</span></h5>
+            <h5 className="card-title">Total: 
+              <CartContext.Consumer>
+                  {({totalPrice}) => <span> { totalPrice }$</span>}
+              </CartContext.Consumer>
+            </h5>
             <a href="#" className="btn btn-primary">Check out</a>
           </div>
         </div>
