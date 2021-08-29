@@ -20,7 +20,6 @@ export default class HomePage extends React.Component {
   componentDidMount() {
     axios.get('http://localhost:4000/api/products')
          .then( response => { this.setState({ products: response.data }) });
-    console.log(this.state);
   };
 
   render() {

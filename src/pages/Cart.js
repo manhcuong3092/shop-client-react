@@ -4,6 +4,7 @@ import "../css/bootstrap.min.css";
 
 import CartItem from '../components/CartItem';
 import { CartContext } from '../contexts/Cart';
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 export default function CartPage() {
   return (
@@ -38,7 +39,7 @@ export default function CartPage() {
                   {({totalPrice}) => <span> { totalPrice }$</span>}
               </CartContext.Consumer>
             </h5>
-            <a href="#" className="btn btn-primary">Check out</a>
+            <Link to="/checkout" className="btn btn-primary">Check out</Link>
           </div>
         </div>
       </div>

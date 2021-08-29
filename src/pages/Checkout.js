@@ -1,6 +1,7 @@
 import React from "react";
 import GuessForm from "../components/GuessForm";
 import CheckoutCartItem from "../components/CheckOutCartItem";
+import { CartContext } from "../contexts/Cart";
 
 export default function CheckoutPage() {
   return (
@@ -12,17 +13,25 @@ export default function CheckoutPage() {
         <div className="col-md-4 order-md-2 mb-4">
           <h4 className="d-flex justify-content-between align-items-center mb-3">
             <span className="text-muted">Your cart</span>
-            <span className="badge badge-secondary badge-pill">3</span>
+            <CartContext.Consumer>
+              { ({totalItem}) => <span className="badge badge-secondary badge-pill">{ totalItem }</span> }
+            </CartContext.Consumer>
           </h4>
           <ul className="list-group mb-3">
-            <CheckoutCartItem />
+            <CartContext.Consumer>
+              { ({cartItems}) => ( cartItems.map(item => <CheckoutCartItem item={item} />)) }
+            </CartContext.Consumer>
             <li className="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>$20</strong>
+              <CartContext.Consumer>
+                  {({totalPrice}) => <strong>${ totalPrice }</strong>}
+              </CartContext.Consumer>
             </li>
           </ul>
         </div>
-        <GuessForm />
+        <CartContext.Consumer>
+          {({cartItems, totalPrice, resetCart}) => <GuessForm cartItems={cartItems} totalPrice={totalPrice} resetCart={resetCart} />}
+        </CartContext.Consumer>
       </div>
     </div>
   )

@@ -15,6 +15,7 @@ export class CartProvider extends Component {
     this.addToCart = this.addToCart.bind(this);
     this.setChangeCart = this.setChangeCart.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.resetCart = this.resetCart.bind(this);
   }
 
   addToCart(product, quantity, size, color) {
@@ -29,15 +30,18 @@ export class CartProvider extends Component {
       this.setState({
         cartItems: cartItems.concat({product, quantity, size, color}),
         totalItem: totalItem + quantity
+      }, () => {
+        this.calculateTotalPrice();
       });
     } else {
       cartItems[duplicatedItemIndex].quantity += quantity;
       this.setState({
         cartItems: cartItems,
         totalItem: totalItem + quantity
+      }, () => {
+        this.calculateTotalPrice();
       });
     }
-    this.calculateTotalPrice()
   }
 
   setChangeCart(product, quantity, size, color) {
@@ -48,6 +52,8 @@ export class CartProvider extends Component {
       this.setState({
         cartItems: cartItems.concat({product, quantity, size, color}),
         totalItem: totalItem + quantity
+      }, () => {
+        this.calculateTotalPrice();
       });
     } else {
       totalItem = totalItem - cartItems[duplicatedItemIndex].quantity + quantity
@@ -55,9 +61,11 @@ export class CartProvider extends Component {
       this.setState({
         cartItems: cartItems,
         totalItem: totalItem
+      }, () => {
+        this.calculateTotalPrice();
       });
     }
-    this.calculateTotalPrice();
+    
   }
 
   deleteItem(product, size, color) {
@@ -71,9 +79,18 @@ export class CartProvider extends Component {
       this.setState({
         cartItems: cartItems,
         totalItem: totalItem
+      }, () => {
+        this.calculateTotalPrice();
       });
     }
-    this.calculateTotalPrice();
+  }
+
+  resetCart() {
+    this.setState({
+      cartItems: [],
+      totalItem: 0,
+      totalPrice: 0
+    })
   }
 
   findDuplicatedItem(product, size, color) {
@@ -108,7 +125,8 @@ export class CartProvider extends Component {
           totalItem: this.state.totalItem,
           totalPrice: this.state.totalPrice,
           setChangeCart: this.setChangeCart,
-          deleteItem: this.deleteItem
+          deleteItem: this.deleteItem,
+          resetCart: this.resetCart
         }}>
           { this.props.children }
         </CartContext.Provider>
